@@ -15,7 +15,8 @@ const App = React.createClass({
     return (
       <div>
         <header><h1>Bench BnB</h1></header>
-        {this.props.children}
+        {this.props.search}
+        {this.props.benchForm}
       </div>
     );
   }
@@ -23,8 +24,8 @@ const App = React.createClass({
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={Search} />
-    <Route path="benches/new" component={BenchForm} />
+    <IndexRoute components={{search: Search}}/>
+    <Route path="benches/new" components={{search: Search, benchForm: BenchForm}}/>
   </Route>
 );
 

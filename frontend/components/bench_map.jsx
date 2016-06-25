@@ -39,6 +39,7 @@ module.exports = React.createClass({
             southWest: {lat: southWest.lat(), lng: southWest.lng()}};
   },
   componentWillUnmount () {
+    console.log("unmount");
     this.listener.remove();
     google.maps.event.removeListener(this.mapListener1);
     google.maps.event.removeListener(this.mapListener2);
@@ -102,7 +103,10 @@ module.exports = React.createClass({
   },
   render () {
     return (
-      <div className='map' ref='map'>
+      <div>
+        <div className='map' ref='map'>
+        </div>
+        {this.props.children}
       </div>
     );
   }

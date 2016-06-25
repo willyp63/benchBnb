@@ -44,6 +44,10 @@
   margin: 5px 0;
 }
 
+.bench-form input {
+  display: block;
+}
+
 /* Let's get this party started */
 ::-webkit-scrollbar {
     width: 12px;
