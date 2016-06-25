@@ -42,7 +42,6 @@ module.exports = React.createClass({
     this.listener.remove();
     google.maps.event.removeListener(this.mapListener1);
     google.maps.event.removeListener(this.mapListener2);
-    this.map = null;
   },
   _onChange () {
     // add new marks and record them
