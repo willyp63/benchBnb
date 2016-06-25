@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+10.times do |i|
+  Bench.create!(lat: 37.7 + rand(1000) / 10000.0,
+                lng: -122.4 - rand(1000) / 10000.0,
+                description: "this is bench number: #{i}!")
+end

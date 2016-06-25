@@ -3,6 +3,8 @@
 <head>
   <title>BenchBnb</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <% my_key = "AIzaSyAZQqaLNYb4zTQKFeAEfGfbvbvx-_8j27g" %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{my_key}" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
