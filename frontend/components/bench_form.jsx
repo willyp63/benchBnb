@@ -1,6 +1,5 @@
 const React = require('react');
 const Modal = require('react-modal');
-const hashHistory = require('react-router').hashHistory;
 
 const customStyles = {
   content: {
@@ -15,14 +14,14 @@ const customStyles = {
 
 module.exports = React.createClass({
   componentWillMount () {
-    Modal.setAppElement('.root');
+    Modal.setAppElement('#root');
   },
   getInitialState () {
     return {modalIsOpen: true,
             description: "",
             numSeats: "",
-            latitude: this.props.location.query.lat,
-            longitude: this.props.location.query.lng};
+            latitude: this.props.lat,
+            longitude: this.props.lng};
   },
   openModal: function () {
     this.setState({modalIsOpen: true});
@@ -33,7 +32,7 @@ module.exports = React.createClass({
   },
   closeModal: function () {
     this.setState({modalIsOpen: false});
-    hashHistory.push({pathname: "/"});
+    this.props.onClose();
   },
   _onChange (e) {
     const newSate = {};

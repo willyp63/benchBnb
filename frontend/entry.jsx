@@ -8,15 +8,16 @@ const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 const Search = require('./components/search');
-const BenchForm = require('./components/bench_form');
+const NavBar = require('./components/nav_bar');
 
 const App = React.createClass({
   render () {
     return (
       <div>
-        <header><h1>Bench BnB</h1></header>
-        {this.props.search}
-        {this.props.benchForm}
+        <NavBar />
+        <div className="content">
+          {this.props.children}
+        </div>
       </div>
     );
   }
@@ -24,8 +25,7 @@ const App = React.createClass({
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute components={{search: Search}}/>
-    <Route path="benches/new" components={{search: Search, benchForm: BenchForm}}/>
+    <IndexRoute component={Search}/>
   </Route>
 );
 

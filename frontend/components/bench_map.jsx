@@ -2,12 +2,16 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const BenchActions = require('../actions/bench_actions');
 const BenchStore = require('../stores/bench_store');
-const hashHistory = require('react-router').hashHistory;
+const BenchForm = require('./bench_form');
 
 module.exports = React.createClass({
+  getInitialState () {
+    return {displayForm: false};
+  },
   componentDidMount () {
     this.markers = {};
     this.highlightedId = null;
+    this.displayForm = false;
 
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     const mapOptions = {
@@ -17,18 +21,20 @@ module.exports = React.createClass({
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
 
     this.mapListener1 = google.maps.event.addListener(this.map, 'idle', this._handleIdle);
-    this.mapListener2 = google.maps.event.addListener(this.map, 'click', this._handleClick);
+    this.mapListener2 = google.maps.event.addListener(this.map, 'click', this._openForm);
   },
-  _handleClick (coords) {
-    const lat = coords.latLng.lat();
-    const lng = coords.latLng.lng();
-    hashHistory.push({
-      pathname: "benches/new",
-      query: {lat: lat, lng: lng}
-    });
+  _openForm (coords) {
+    this.clickLat = coords.latLng.lat();
+    this.clickLng = coords.latLng.lng();
+    this.setState({displayForm: true});
+  },
+  _closeForm () {
+    this.setState({displayForm: false});
   },
   _handleIdle () {
-    this.listener = BenchStore.addListener(this._onChange);
+    if (!this.storeListener) {
+      this.storeListener = BenchStore.addListener(this._onChange);
+    }
     BenchActions.fetchBenches(this.getBounds());
   },
   getBounds () {
@@ -39,8 +45,7 @@ module.exports = React.createClass({
             southWest: {lat: southWest.lat(), lng: southWest.lng()}};
   },
   componentWillUnmount () {
-    console.log("unmount");
-    this.listener.remove();
+    this.storeListener.remove();
     google.maps.event.removeListener(this.mapListener1);
     google.maps.event.removeListener(this.mapListener2);
   },
@@ -106,7 +111,11 @@ module.exports = React.createClass({
       <div>
         <div className='map' ref='map'>
         </div>
-        {this.props.children}
+
+        {this.state.displayForm ?
+          <BenchForm lat={this.clickLat}
+                     lng={this.clickLng}
+                     onClose={this._closeForm} /> : ""}
       </div>
     );
   }
