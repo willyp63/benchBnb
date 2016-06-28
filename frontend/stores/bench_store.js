@@ -34,6 +34,10 @@ BenchStore.__onDispatch = function (payload) {
       unhighlightBench(payload.id);
       this.__emitChange();
       break;
+    case "NEW_BENCH":
+      _benches[payload.bench.id] = payload.bench;
+      this.__emitChange();
+      break;
   }
 };
 

@@ -16,8 +16,8 @@ module.exports = {
       method: 'POST',
       dataType: 'JSON',
       data: {bench: bench},
-      success (bench) {
-        callback(bench);
+      success (newBench) {
+        callback(newBench);
       }
     });
   }

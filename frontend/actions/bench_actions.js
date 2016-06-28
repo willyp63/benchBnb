@@ -11,6 +11,14 @@ module.exports = {
       benches: benches
     });
   },
+  createBench (bench) {
+    BenchAPIUtil.postBench(bench, function (newBench) {
+      dispatcher.dispatch({
+        actionType: "NEW_BENCH",
+        bench: newBench
+      });
+    });
+  },
   highlightBench (id) {
     dispatcher.dispatch({
       actionType: "BENCH_HIGHLIGHTED",

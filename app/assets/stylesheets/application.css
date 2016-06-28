@@ -68,6 +68,30 @@
   background-color: white;
 }
 
+.nav-bar h2 {
+  float: right;
+  line-height: 40px;
+  margin-right: 10px;
+  color: lightblue;
+  font-weight: normal;
+}
+
+.nav-bar button {
+  float: right;
+  width: 100px;
+  height: 30px;
+  margin: 5px 10px;
+  border: 1px solid #666666;
+  border-radius: 5px;
+  color: lightblue;
+  font-size: 20px;
+}
+
+.nav-bar button:hover {
+  cursor: pointer;
+  background-color: #666666;
+}
+
  .content {
    position: absolute;
    top: 50px;
@@ -106,9 +130,37 @@
   border-bottom: none;
 }
 
-.bench-form input {
-  margin: 15px 50px;
+.bench-form input, .login-form input {
   display: block;
+  background-color: white;
+  margin: 15px auto;
+}
+
+.bench-form label, .login-form label {
+  display: block;
+  margin: 15px 100px;
+}
+
+.bench-form ul, .login-form ul {
+  display: block;
+  margin-left: 50px;
+  color: red;
+}
+
+.bench-form input[type="submit"], .login-form input[type="submit"] {
+  margin: 0 auto;
+  width: 120px;
+  height: 30px;
+  border: 1px solid #666666;
+  border-radius: 5px;
+  color: lightblue;
+  font-size: 16px;
+}
+
+
+.bench-form input[type="submit"]:hover, .login-form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #666666;
 }
 
 /* Let's get this party started */
